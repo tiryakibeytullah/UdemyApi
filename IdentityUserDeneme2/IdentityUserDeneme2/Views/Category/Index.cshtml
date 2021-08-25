@@ -1,0 +1,55 @@
+﻿@model IEnumerable<IdentityUserDeneme2.DTOs.CategoryDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<figure class="text-center">
+    <blockquote class="blockquote">
+        <h2>Categories</h2>
+    </blockquote>
+    <figcaption class="blockquote-footer mt-1">
+        Page with category information.
+    </figcaption>
+</figure>
+
+<div class="container">
+    <div class="col align-self-center">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    @if (ViewBag.roleName != null)
+                    {
+                        <th scope="col" style="padding-right:180px; text-align:right;">Transactions</th>
+                    }
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var category in Model)
+                {
+                    <tr>
+                        <th scope="row">@category.Id</th>
+                        <th scope="row">@category.Name</th>
+                        @if (@ViewBag.roleName == "Admin")
+                        {
+                            <th scope="row" style="padding-right: 150px; text-align: right;">
+                                <a class="btn btn-outline-success btn-sm" asp-action="Update" asp-route-id="@category.Id">Update</a>
+                                <a class="btn btn-outline-danger mx-2 btn-sm" asp-action="Delete" asp-route-id="@category.Id">Delete</a>
+                            </th>
+                        }
+                        @if (ViewBag.roleName == "Student")
+                        {
+                            <th scope="row" style="padding-right: 150px; text-align: right;">
+                                <a class="btn btn-outline-success btn-sm" asp-action="IndexWithCourse" asp-route-id="@category.Id">Detail</a>
+                            </th>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

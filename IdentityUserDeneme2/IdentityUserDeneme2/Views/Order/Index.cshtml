@@ -1,0 +1,95 @@
+﻿@model IEnumerable<IdentityUserDeneme2.DTOs.OrderDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var studentList = (List<SelectListItem>)ViewData["studentList"];
+    var courseList = (List<SelectListItem>)ViewData["courseList"];
+}
+
+<figure class="text-center">
+    <blockquote class="blockquote">
+        <h2>Orders</h2>
+    </blockquote>
+    <figcaption class="blockquote-footer mt-1">
+        Page with order information.
+    </figcaption>
+</figure>
+
+<div class="container">
+    <div class="col align-self-center">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Student Name</th>
+                    <th scope="col">Course Name</th>
+                    <th scope="col" style="padding-right:180px; text-align:right;">Transactions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var order in Model)
+                {
+                    @if (ViewBag.roleName == "Admin")
+                    {
+                        <tr>
+                            <th scope="row">@order.Id</th>
+                            <th scope="row">
+                                @foreach (var item in studentList)
+                                {
+                                    @if (order.StudentId == Convert.ToInt32(item.Value))
+                                    {
+                                        @item.Text
+                                    }
+                                }
+                            </th>
+                            <th scope="row">
+                                @foreach (var item in courseList)
+                                {
+                                    @if (order.CourseId == Convert.ToInt32(item.Value))
+                                    {
+                                        @item.Text
+                                    }
+                                }
+                            </th>
+                            <th scope="row" style="padding-right: 150px; text-align: right;">
+                                <a class="btn btn-outline-success btn-sm" asp-action="Update" asp-route-id="@order.Id">Update</a>
+                                <a class="btn btn-outline-danger mx-2 btn-sm" asp-action="Delete" asp-route-id="@order.Id">Delete</a>
+                                <a class="btn btn-outline-info mx-2 btn-sm" asp-action="GetWithCourse" asp-route-id="@order.Id">Detail</a>
+                            </th>
+                        </tr>
+                    }
+                    @if (ViewBag.roleName == "Student")
+                    {
+                        @if (ViewBag.userId == order.StudentId)
+                        {
+                            <tr>
+                                <th scope="row">@order.Id</th>
+                                <th scope="row">
+                                    @foreach (var item in studentList)
+                                    {
+                                        @if (order.StudentId == Convert.ToInt32(item.Value))
+                                        {
+                                            @item.Text
+                                        }
+                                    }
+                                </th>
+                                <th scope="row">
+                                    @foreach (var item in courseList)
+                                    {
+                                        @if (order.CourseId == Convert.ToInt32(item.Value))
+                                        {
+                                            @item.Text
+                                        }
+                                    }
+                                </th>
+                                <th scope="row" style="padding-right: 150px; text-align: right;">
+                                    <a class="btn btn-outline-info btn-sm mr-5" asp-action="GetWithCourse" asp-route-id="@order.Id">Detail</a>
+                                </th>
+                            </tr>
+                        }
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

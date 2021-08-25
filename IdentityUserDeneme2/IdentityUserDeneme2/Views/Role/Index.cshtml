@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityRole>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<figure class="text-center">
+    <blockquote class="blockquote">
+        <h2>Roles</h2>
+    </blockquote>
+    <figcaption class="blockquote-footer mt-1">
+        Page with role information.
+    </figcaption>
+    <div class="text-center">
+        <a class="mb-3" asp-action="Create" style="text-decoration:none;">New Role</a>
+    </div>
+</figure>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Role Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var role in Model)
+        {
+            <tr>
+                <th scope="row">@role.Id</th>
+                <td>@role.Name</td>
+            </tr>
+        }
+    </tbody>
+</table>

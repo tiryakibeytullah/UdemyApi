@@ -1,0 +1,51 @@
+﻿@model IEnumerable<IdentityUserDeneme2.DTOs.StudentDto>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<figure class="text-center">
+    <blockquote class="blockquote">
+        <h2>Students</h2>
+    </blockquote>
+    <figcaption class="blockquote-footer mt-1">
+        Page with student information.
+    </figcaption>
+    <div class="text-center">
+        <a class="mb-3" asp-action="Create" style="text-decoration:none;">New Students</a>
+    </div>
+</figure>
+
+<div class="container">
+    <div class="col align-self-center">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Telephone</th>
+                    <th scope="col">Mail</th>
+                    <th scope="col" style="padding-right:180px; text-align:right;">Transactions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var student in Model)
+                {
+                    <tr>
+                        <th scope="row">@student.Id</th>
+                        <th scope="row">@student.Name</th>
+                        <th scope="row">@student.Surname</th>
+                        <th scope="row">@student.Telephone</th>
+                        <th scope="row">@student.Mail</th>
+                        <th scope="row" style="padding-right: 150px; text-align: right;">
+                            <a class="btn btn-outline-success btn-sm" asp-action="Update" asp-route-id="@student.Id">Update</a>
+                            <a class="btn btn-outline-danger mx-2 btn-sm" asp-action="Delete" asp-route-id="@student.Id">Delete</a>
+                        </th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

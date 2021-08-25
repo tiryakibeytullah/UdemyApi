@@ -1,0 +1,38 @@
+﻿@model IdentityUserDeneme2.DTOs.OrderWithCourseDto
+@{
+    ViewData["Title"] = "GetWithCourse";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<figure class="text-center">
+    <blockquote class="blockquote">
+        <h2>Order Detail</h2>
+    </blockquote>
+    <figcaption class="blockquote-footer mt-1">
+        Page with order detail information.
+    </figcaption>
+</figure>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Description</th>
+            <th scope="col">Price</th>
+            <th scope="col">Course Hour</th>
+            <th scope="col">Student Id</th>
+            <th scope="col" style="padding-right:180px; text-align:right;">Order Time</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">@Model.Courses.Name</th>
+            <th scope="row">@Model.Courses.Description</th>
+            <th scope="row">@Model.Courses.Price</th>
+            <th scope="row">@Model.Courses.Course_Hour</th>
+            <th scope="row">@Model.StudentId</th>
+            <th scope="row">@Model.OrderTime</th>
+        </tr>
+    </tbody>
+</table>
+
